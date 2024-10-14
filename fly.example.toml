@@ -1,0 +1,31 @@
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "CHANGE_ME"
+primary_region = "fra"
+swap_size_mb = 128
+
+[build]
+  image = "ghcr.io/niklasrosenstein/ghost-fly-io:sha-f4fda0d"
+
+[deploy]
+  strategy = "immediate"
+
+[http_service]
+  internal_port = 2368
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/ghost/api/v3/admin/site/"
+    [http_service.checks.headers]
+      X-Forwarded-Proto = "https"
+
+[[vm]]
+  size = "shared-cpu-2x"
