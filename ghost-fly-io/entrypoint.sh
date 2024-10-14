@@ -8,6 +8,10 @@ info() {
   >&2 echo "[$0 |  INFO]:" "$@"
 }
 
+error() {
+  >&2 echo "[$0 | ERROR]:" "$@"
+}
+
 info_run() {
   info "$@"
   "$@"
@@ -62,7 +66,7 @@ main() {
   export BUCKET_PATH="ghost.db"
   init_ghost_content
   maybe_idle
-  info_run exec litestream-entrypoint.sh "node current/index.js"
+  info_run exec /litestream-entrypoint.sh "node current/index.js"
 }
 
 main "$@"
