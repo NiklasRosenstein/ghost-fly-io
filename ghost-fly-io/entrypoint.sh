@@ -42,6 +42,7 @@ mount_s3() {
 
 init_ghost_content() {
   # Copied from Ghost's docker-entrypoint.sh
+  info "initializing ghost content dir"
   baseDir="$GHOST_INSTALL/content.orig"
   for src in "$baseDir"/*/ "$baseDir"/themes/*; do
     src="${src%/}"
@@ -61,7 +62,7 @@ main() {
   export BUCKET_PATH="ghost.db"
   init_ghost_content
   maybe_idle
-  info_run exec node current/index.js
+  info_run exec litestream-entrypoint.sh "node current/index.js"
 }
 
 main "$@"
