@@ -63,6 +63,8 @@ main() {
   export NODE_ENV=development # To be able to use SQlite
   export LITESTREAM_DATABASE_PATH="/db.sqlite"
   export database__connection__filename="$LITESTREAM_DATABASE_PATH"
+  export server__host="0.0.0.0"
+  export url="https://${FLY_APP_NAME}.fly.dev"
   export BUCKET_PATH="ghost.db"
   init_ghost_content
   maybe_idle

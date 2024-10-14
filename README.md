@@ -15,6 +15,14 @@ It uses an SQlite database replicated to S3 using [Litestream] and the Ghost con
 > Disclaimer: We use `NOD_ENV=development` to allow using an SQlite database in the first place. I'm unaware of any
 > consequences for production scenarios _aside_ from allowing to use SQlite, so tread carefully.
 
+## Installation
+
+1. Create a Fly app with `fly app create <app>`
+2. Create and attach an S3 bucket with `fly storage create -a <app> -n <app>`
+3. Create encryption key for the database with `age-keygen` and `fly secrets set AGE_SECRET_KEY=...`
+4. Copy and update `fly.example.toml` to `fly.toml`
+5. Run `fly deploy`
+
 ## Configuration
 
 ### Litestream & GeeseFS
