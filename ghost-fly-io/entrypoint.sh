@@ -52,6 +52,9 @@ init_ghost_content() {
     src="${src%/}"
     target="$GHOST_CONTENT/${src#$baseDir/}"
     mkdir -p "$(dirname "$target")"
+    # TODO: Something goes wrong here with GeeseFS, causing a single 0-byte file to be created instead
+    #       of the tar to be unpacked properly, at least for the themes/ directory. This works okay when
+    #       installing themes in the Ghost admin panel however.
     if [ ! -e "$target" ]; then
       tar -cC "$(dirname "$src")" "$(basename "$src")" | tar -xC "$(dirname "$target")"
     fi
