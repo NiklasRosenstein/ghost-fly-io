@@ -2,12 +2,15 @@
 
   [1]: https://github.com/NiklasRosenstein/headscale-fly-io
   [2]: https://github.com/NiklasRosenstein/vaultwarden-fly-io
+  [Litestream]: https://litestream.io
   [GeeseFS]: https://github.com/yandex-cloud/geesefs/
 
-This repository is inspired by my other projects, [Headscale on Fly.io][1] and [Vaultwarden on Fly.io][2], although I
-actually run this particular variant on Kubernetes (works just as well!). Instead of using a persistent volume, this
-container mounts an S3 bucket using [GeeseFS] to store all Ghost content in S3 (not just media files as is the case
-with the Ghost Amazon S3 integration).
+This repository is inspired by my other projects, [Headscale on Fly.io][1] and [Vaultwarden on Fly.io][2]. The goal is
+to create a simple deployment of the [Ghost] blogging platform that gets away without persistent storage or an external
+database; just a machine and S3.
+
+It uses an SQlite database replicated to S3 using [Litestream] and the Ghost content folder an S3 bucket mounted via
+[GeeseFS].
 
 > Disclaimer: We use `NOD_ENV=development` to allow using an SQlite database in the first place. I'm unaware of any
 > consequences for production scenarios _aside_ from allowing to use SQlite, so tread carefully.
