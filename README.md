@@ -9,6 +9,9 @@ actually run this particular variant on Kubernetes (works just as well!). Instea
 container mounts an S3 bucket using [GeeseFS] to store all Ghost content in S3 (not just media files as is the case
 with the Ghost Amazon S3 integration).
 
+> Disclaimer: We use `NOD_ENV=development` to allow using an SQlite database in the first place. I'm unaware of any
+> consequences for production scenarios _aside_ from allowing to use SQlite, so tread carefully.
+
 ## Configuration
 
 ### Litestream & GeeseFS
