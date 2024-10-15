@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 #
 # Utilities
 #
@@ -40,7 +42,7 @@ mount_s3() {
   if [ "${GEESEFS_ENABLED:-true}" = "true" ]; then
     info "setting up S3 mountpoint"
     GEESEFS_MEMORY_LIMIT=${GEESEFS_MEMORY_LIMIT:-64}
-    info_run sudo -E geesefs --memory-limit "$GEESEFS_MEMORY_LIMIT" --endpoint "$AWS_ENDPOINT_URL_S3" "$BUCKET_NAME:data/" /var/lib/ghost/content
+    info_run geesefs --memory-limit "$GEESEFS_MEMORY_LIMIT" --endpoint "$AWS_ENDPOINT_URL_S3" "$BUCKET_NAME:data/" /var/lib/ghost/content
   fi
 }
 
