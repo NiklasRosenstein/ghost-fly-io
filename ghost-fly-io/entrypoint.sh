@@ -53,10 +53,15 @@ init_ghost_content() {
 
 main() {
   mount_s3
-  export NODE_ENV=development # To be able to use SQlite
-  export LITESTREAM_DATABASE_PATH="/db.sqlite"
+
+  # See https://ghost.org/docs/config/
+  export database__client="sqlite3"
   export database__connection__filename="$LITESTREAM_DATABASE_PATH"
+  export database__useNullAsDefault="true"
+  export database__debug="false"
   export server__host="0.0.0.0"
+
+  export LITESTREAM_DATABASE_PATH="/db.sqlite"
   export url="https://${FLY_APP_NAME}.fly.dev"
   export BUCKET_PATH="ghost.db"
   init_ghost_content

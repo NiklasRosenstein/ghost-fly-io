@@ -12,9 +12,6 @@ database; just a machine and S3.
 It uses an SQlite database replicated to S3 using [Litestream] and the Ghost content folder an S3 bucket mounted via
 [GeeseFS].
 
-> Disclaimer: We use `NOD_ENV=development` to allow using an SQlite database in the first place. I'm unaware of any
-> consequences for production scenarios _aside_ from allowing to use SQlite, so tread carefully.
-
 ## Installation
 
 1. Create a Fly app with `fly app create <app>`
