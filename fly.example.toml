@@ -7,7 +7,7 @@ primary_region = "fra"
 swap_size_mb = 128
 
 [build]
-  image = "ghcr.io/niklasrosenstein/ghost-fly-io:sha-f4fda0d"
+  image = "ghcr.io/niklasrosenstein/ghost-fly-io:0.1.0-ghost-5.96.1"
 
 [deploy]
   strategy = "immediate"
