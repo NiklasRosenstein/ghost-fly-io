@@ -38,6 +38,10 @@ trap 'on_error' EXIT
 # Business logic
 #
 
+export LITESTREAM_DATABASE_PATH='/db.sqlite'
+export BUCKET_PATH="ghost.db"
+GHOST_URL="${GHOST_URL:-https://${FLY_APP_NAME}.fly.dev}"
+
 mount_s3() {
   if [ "${GEESEFS_ENABLED:-true}" = "true" ]; then
     info "setting up S3 mountpoint"
@@ -51,19 +55,34 @@ init_ghost_content() {
   rsync -rvL "$GHOST_INSTALL/content.orig/" "$GHOST_INSTALL/content/"
 }
 
+write_config() {
+  # See https://ghost.org/docs/config/
+  cat <<EOF >config.production.json
+{
+  "database": {
+    "client": "sqlite3",
+    "connection": {
+      "filename": "$LITESTREAM_DATABASE_PATH"
+    },
+    "useNullAsDefault": true,
+    "debug": false
+  },
+  "server": {
+    "host": "0.0.0.0"
+  },
+  "url": "$GHOST_URL"
+}
+EOF
+
+  # Validate the config.
+  if ! jq <config.production.json; then
+    error "config.production.json is invalid"
+  fi
+}
+
 main() {
   mount_s3
-
-  # See https://ghost.org/docs/config/
-  export database__client="sqlite3"
-  export database__connection__filename="$LITESTREAM_DATABASE_PATH"
-  export database__useNullAsDefault="true"
-  export database__debug="false"
-  export server__host="0.0.0.0"
-
-  export LITESTREAM_DATABASE_PATH="/db.sqlite"
-  export url="https://${FLY_APP_NAME}.fly.dev"
-  export BUCKET_PATH="ghost.db"
+  write_config
   init_ghost_content
   maybe_idle
   info_run exec /litestream-entrypoint.sh "node current/index.js"
