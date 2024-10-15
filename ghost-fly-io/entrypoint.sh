@@ -51,8 +51,12 @@ mount_s3() {
 }
 
 init_ghost_content() {
-  info "initializing ghost content dir"
-  rsync -rvL "$GHOST_INSTALL/content.orig/" "$GHOST_INSTALL/content/"
+  init_file="$GHOST_INSTALL/content/.initialized"
+  if [ ! -f "$init_file" ]; then
+    info "initializing ghost content dir"
+    rsync -rvL "$GHOST_INSTALL/content.orig/" "$GHOST_INSTALL/content/"
+    touch "$init_file"
+  fi
 }
 
 write_config() {
