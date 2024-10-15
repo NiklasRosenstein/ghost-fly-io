@@ -46,7 +46,7 @@ mount_s3() {
   if [ "${GEESEFS_ENABLED:-true}" = "true" ]; then
     info "setting up S3 mountpoint"
     GEESEFS_MEMORY_LIMIT=${GEESEFS_MEMORY_LIMIT:-64}
-    info_run geesefs --memory-limit "$GEESEFS_MEMORY_LIMIT" --endpoint "$AWS_ENDPOINT_URL_S3" "$BUCKET_NAME:data/" /var/lib/ghost/content
+    info_run geesefs --memory-limit "$GEESEFS_MEMORY_LIMIT" --endpoint "$AWS_ENDPOINT_URL_S3" "$BUCKET_NAME:data/" "$GHOST_INSTALL/content"
   fi
 }
 
@@ -73,6 +73,9 @@ write_config() {
   },
   "server": {
     "host": "0.0.0.0"
+  },
+  "paths": {
+    "contentPath": "$GHOST_INSTALL/content/"
   },
   "url": "$GHOST_URL"
 }
