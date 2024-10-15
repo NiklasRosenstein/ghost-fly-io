@@ -48,7 +48,7 @@ mount_s3() {
 
 init_ghost_content() {
   info "initializing ghost content dir"
-  rsync -rv "$GHOST_INSTALL/content.orig/" "$GHOST_INSTALL/content/"
+  rsync -rvL "$GHOST_INSTALL/content.orig/" "$GHOST_INSTALL/content/"
 }
 
 main() {
