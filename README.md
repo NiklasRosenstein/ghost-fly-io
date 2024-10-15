@@ -4,6 +4,7 @@
   [2]: https://github.com/NiklasRosenstein/vaultwarden-fly-io
   [Litestream]: https://litestream.io
   [GeeseFS]: https://github.com/yandex-cloud/geesefs/
+  [Ghost]: https://ghost.org/
 
 This repository is inspired by my other projects, [Headscale on Fly.io][1] and [Vaultwarden on Fly.io][2]. The goal is
 to create a simple deployment of the [Ghost] blogging platform that gets away without persistent storage or an external
