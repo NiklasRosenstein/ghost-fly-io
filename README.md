@@ -22,6 +22,8 @@ It uses an SQlite database replicated to S3 using [Litestream] and the Ghost con
 
 ## Configuration
 
+* `GHOST_URL`: URL of the app (default: `https://${FLY_APP_NAME}.fly.dev`).
+
 ### Litestream & GeeseFS
 
 GeeseFS re-uses the same S3-related environment variables as our Litestream configuration. For the variables of that
