@@ -28,6 +28,7 @@ It uses an SQlite database replicated to S3 using [Litestream] and the Ghost con
   services like Mailgun)
   - `GHOST_SMTP_HOST`
   - `GHOST_SMTP_PORT` (defaults to 465)
+  - `GHOST_SMTP_FROM`
   - `GHOST_SMTP_USER`
   - `GHOST_SMTP_PASS`
 
