@@ -79,7 +79,7 @@ write_config() {
 EOF
 
   if [ "${GHOST_ENABLE_SMTP:-false}" = "true" ]; then
-    cat <<EOF >$CONFIG_FILE
+    cat <<EOF >>$CONFIG_FILE
   "mail": {
     "transport": "SMTP",
     "options": {
@@ -95,7 +95,7 @@ EOF
 EOF
   fi
 
-  cat <<EOF >$CONFIG_FILE
+  cat <<EOF >>$CONFIG_FILE
   "paths": {
     "contentPath": "$GHOST_INSTALL/content/"
   },
