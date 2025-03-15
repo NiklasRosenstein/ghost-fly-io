@@ -43,8 +43,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          # We use a PAT to allow publishing from pull requests.
-          # password: ${{ env.GH_PAT}} # ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
