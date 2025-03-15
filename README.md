@@ -37,3 +37,7 @@ It uses an SQlite database replicated to S3 using [Litestream] and the Ghost con
 GeeseFS re-uses the same S3-related environment variables as our Litestream configuration. For the variables of that
 configuration, see
 [litestream-entrypoint.sh](https://github.com/NiklasRosenstein/headscale-fly-io/blob/main/headscale-fly-io/litestream-entrypoint.sh).
+
+### Logs
+
+Ghost's logs can be found under `/var/lib/ghost/content/logs`.
