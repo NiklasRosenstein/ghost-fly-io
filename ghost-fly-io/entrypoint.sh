@@ -60,8 +60,10 @@ init_ghost_content() {
 }
 
 write_config() {
+  CONFIG_FILE=config.production.json
+
   # See https://ghost.org/docs/config/
-  cat <<EOF >config.production.json
+  cat <<EOF >$CONFIG_FILE
 {
   "database": {
     "client": "sqlite3",
@@ -74,6 +76,27 @@ write_config() {
   "server": {
     "host": "0.0.0.0"
   },
+EOF
+
+  if [ "${GHOST_ENABLE_SMTP:-false}" = "true" ]; then
+    cat <<EOF >>$CONFIG_FILE
+  "mail": {
+    "transport": "SMTP",
+    "from": "${GHOST_SMTP_FROM}",
+    "options": {
+      "host": "${GHOST_SMTP_HOST}",
+      "port": ${GHOST_SMTP_PORT:-465},
+      "secure": true,
+      "auth": {
+        "user": "${GHOST_SMTP_USER}",
+        "pass": "${GHOST_SMTP_PASS}"
+      }
+    }
+  },
+EOF
+  fi
+
+  cat <<EOF >>$CONFIG_FILE
   "paths": {
     "contentPath": "$GHOST_INSTALL/content/"
   },
@@ -82,8 +105,8 @@ write_config() {
 EOF
 
   # Validate the config.
-  if ! jq <config.production.json; then
-    error "config.production.json is invalid"
+  if ! jq <$CONFIG_FILE; then
+    error "$CONFIG_FILE is invalid"
   fi
 }
 
