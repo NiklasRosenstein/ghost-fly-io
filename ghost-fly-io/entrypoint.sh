@@ -82,10 +82,10 @@ EOF
     cat <<EOF >>$CONFIG_FILE
   "mail": {
     "transport": "SMTP",
+    "from": "${GHOST_SMTP_FROM}",
     "options": {
       "host": "${GHOST_SMTP_HOST}",
       "port": ${GHOST_SMTP_PORT:-465},
-      "from": "${GHOST_SMTP_FROM}",
       "secure": true,
       "auth": {
         "user": "${GHOST_SMTP_USER}",
