@@ -105,7 +105,7 @@ EOF
 EOF
 
   # Validate the config.
-  if ! jq <$CONFIG_FILE; then
+  if ! jq <$CONFIG_FILE >/dev/null; then
     error "$CONFIG_FILE is invalid"
   fi
 }
