@@ -12,7 +12,7 @@ RUN arch=$(cat /tmp/arch) &&\
     wget https://github.com/yandex-cloud/geesefs/releases/download/v0.41.3/geesefs-linux-${arch} -O geesefs && \
     chmod +x geesefs
 
-FROM ghost:5.110.2-alpine
+FROM ghost:5.113.0-alpine
 RUN apk add age fuse jq rsync
 COPY --from=litestream /litestream /usr/bin/litestream
 COPY --from=ghcr.io/niklasrosenstein/headscale-fly-io:0.4.2-headscale-0.23.0 /etc/headscale/litestream-entrypoint.sh /
